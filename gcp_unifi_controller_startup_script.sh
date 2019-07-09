@@ -2,8 +2,8 @@
 apt-get update
 
 #Stackdriver monitoring and logging
-curl -sSO https://repo.stackdriver.com/stack-install.sh
-bash stack-install.sh --write-gcm
+curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
+bash install-monitoring-agent.sh
 curl -sSO https://dl.google.com/cloudagents/install-logging-agent.sh
 bash install-logging-agent.sh 
 

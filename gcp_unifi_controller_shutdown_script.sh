@@ -1,5 +1,5 @@
 #! /bin/bash
-sudo docker stop unifi
+sudo docker stop unifi || true
 sudo gsutil -m rsync -r -d /unifi gs://belisleonline-unifi-controller/unifi
 # tar the certbot dir and copy to storage bucket
 sudo tar -czvf certbot.tar /certbot
