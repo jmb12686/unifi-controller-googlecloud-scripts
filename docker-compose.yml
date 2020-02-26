@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   unifi:
-    image: jacobalberty/unifi:stable
+    image: jacobalberty/unifi:5.12.35-arm32v7
     init: true
     environment:
       TZ: "America/New_York"
