@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+  unifi:
+    image: jacobalberty/unifi:stable
+    init: true
+    environment:
+      TZ="America/New_York"
+      RUNAS_UID0=false
+      UNIFI_UID=1000
+      UNIFI_GID=1000
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "3478:3478/udp"
+      - "10001:10001/udp"
+      - "8880:8880"
+      - "6789:6789"
+    volumes:
+      - unifi-controller-data:/unifi
+    networks:
+      - unifi
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 1024M      
+        reservations:
+          memory: 1024M
+
+networks:
+  unifi:
+    driver: overlay
+
+volumes:
+  unifi-controller-data:
+    driver: glusterfs:latest
+    name: "shared-volume/unifi-controller-data"
