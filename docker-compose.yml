@@ -6,7 +6,7 @@ services:
     init: true
     environment:
       TZ: "America/New_York"
-      RUNAS_UID0: false
+      RUNAS_UID0: "false"
       UNIFI_UID: 1000
       UNIFI_GID: 1000
     ports:
