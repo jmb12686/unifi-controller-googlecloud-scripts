@@ -72,9 +72,9 @@ sudo docker run -dit -m 600m --rm --init -p 8080:8080 \
  -e UNIFI_GID=9999 -v /unifi:/unifi --name unifi jacobalberty/unifi:stable
 
 
-echo "0 6 * * * root (gsutil -m rsync -r -d /unifi gs://belisleonline-unifi-controller/unifi) 2>&1 | logger -t unifi-backup-cron" >> /etc/cron.d/backupunifidir
+echo "0 6 * * * root (/snap/bin/gsutil -m rsync -r -d /unifi gs://belisleonline-unifi-controller/unifi) 2>&1 | logger -t unifi-backup-cron" >> /etc/cron.d/backupunifidir
 echo "0 7 * * * root (docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /certbot/etc/letsencrypt:/etc/letsencrypt -v /certbot/var/lib/letsencrypt:/var/lib/letsencrypt -v /unifi/cert:/data/letsencrypt -v /certbot/var/log/letsencrypt:/var/log/letsencrypt -p 443:443 -p 80:80 certbot/certbot renew --quiet) 2>&1 | logger -t certbot-renew-cron" >> /etc/cron.d/certbotrenewal
-echo "0 8 * * * root (tar -czvf certbot.tar /certbot && gsutil cp /certbot.tar gs://belisleonline-unifi-controller/certbot.tar) 2>&1 | logger -t certbot-backup-cron" >> /etc/cron.d/backupcertbotdir
+echo "0 8 * * * root (tar -czvf certbot.tar /certbot && /snap/bin/gsutil cp /certbot.tar gs://belisleonline-unifi-controller/certbot.tar) 2>&1 | logger -t certbot-backup-cron" >> /etc/cron.d/backupcertbotdir
 
 gsutil cp gs://belisleonline-unifi-controller/etc/google-fluentd/config.d/unifi.conf /etc/google-fluentd/config.d/unifi.conf
 gsutil cp gs://belisleonline-unifi-controller/etc/google-fluentd/config.d/certbot.conf /etc/google-fluentd/config.d/certbot.conf
